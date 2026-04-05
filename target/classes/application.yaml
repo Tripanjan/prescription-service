@@ -1,0 +1,50 @@
+spring:
+  application:
+    name: prescription-service
+
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:mysql://localhost:3306/prescription_db?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true}
+    username: ${SPRING_DATASOURCE_USERNAME:root}
+    password: ${SPRING_DATASOURCE_PASSWORD:root}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  
+  # JPA Configuration
+  jpa:
+    hibernate:
+      ddl-auto: ${SPRING_JPA_HIBERNATE_DDL_AUTO:update}
+    show-sql: ${SPRING_JPA_SHOW_SQL:true}
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+        format_sql: true
+  
+  # Cache Configuration
+  cache:
+    type: none
+
+# Server Configuration - Different Port!
+server:
+  port: ${SERVER_PORT:8082}
+
+# Medicine Service URL (for inter-service communication)
+medicine:
+  service:
+    url: ${MEDICINE_SERVICE_URL:http://localhost:8081/api/medicines}
+
+# Discount Configuration
+discount:
+  tier1:
+    threshold: 300
+    percentage: 5
+  tier2:
+    threshold: 1000
+    percentage: 10
+  tier3:
+    threshold: 1500
+    percentage: 15
+
+# Logging
+logging:
+  level:
+    com.medi.prescription: INFO
